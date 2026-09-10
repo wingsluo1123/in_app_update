@@ -1,0 +1,26 @@
+﻿name: in_app_update_ohos
+description: Enables In App Updates on Android and OpenHarmony. On Android uses the official Android APIs, on OpenHarmony uses AppGallery Connect Upgrade Kit.
+version: 5.0.0+ohos
+homepage: https://jonasbark.de
+repository: https://github.com/jonasbark/flutter_in_app_update
+
+environment:
+  sdk: ^3.12.0
+  flutter: ">=3.44.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  plugin:
+    platforms:
+      android:
+        package: de.ffuf.in_app_update
+        pluginClass: InAppUpdatePlugin
+      ohos:
+        pluginClass: InAppUpdateOhosPlugin

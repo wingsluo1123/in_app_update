@@ -1,0 +1,7 @@
+﻿{
+  "module": {
+    "name": "in_app_update_ohos",
+    "type": "har",
+    "deviceTypes": ["phone", "tablet", "2in1"]
+  }
+}

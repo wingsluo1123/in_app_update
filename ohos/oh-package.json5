@@ -1,0 +1,11 @@
+﻿{
+  "name": "in_app_update_ohos",
+  "version": "1.0.0",
+  "description": "HarmonyOS NEXT in-app update plugin using StoreKit updateManager",
+  "main": "index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@ohos/flutter_ohos": "file:../har"
+  }
+}
