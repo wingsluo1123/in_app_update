@@ -29,6 +29,17 @@ flutter run -d <ohos-device-id>
 
 启动后点击“检查更新”。当 AppGallery Connect 检测到新版本时，再测试“立即更新”或“灵活更新”流程。若检查失败，请优先查看 DevEco Studio/Hilog 日志中的 Upgrade Kit 错误码。
 
+## 本地实测记录
+
+本仓库曾在以下设备上尝试启动示例应用：
+
+- 设备系统：HarmonyOS `7.0.0.105`（API 26）
+- 设备架构：`ohos-arm64`
+- Flutter：`3.44.9+ohos-0.0.1-canary1`
+- 结果：设备可被 `flutter devices` 和 `hdc list targets` 正确识别，构建可进入 Hvigor/ArkTS 编译阶段；但当前本机 `@ohos/flutter_ohos` embedding 与安装的 HarmonyOS SDK 在 `autoFillManager` API 上存在版本不匹配，导致 HAP 编译失败。该失败发生在 Flutter embedding 依赖代码中，不是 `in_app_update` 的 Upgrade Kit 代码或 Dart API 引起。
+
+因此，目前可以确认设备连接和 Flutter 工具链能够识别 HarmonyOS 7，但要完成安装及更新流程验证，还需要将 Flutter OpenHarmony SDK、`@ohos/flutter_ohos` 和 HarmonyOS SDK 调整到相互匹配的版本。
+
 ## 已知限制
 
 - 本插件只负责调用系统更新能力，不提供应用商店或版本发布服务。
