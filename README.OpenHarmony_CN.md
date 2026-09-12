@@ -2,7 +2,7 @@
 
 基于 AppGallery Connect Upgrade Kit 实现应用内更新功能。
 
-> HarmonyOS 7.0 兼容性：插件的目标设备类型包含 `phone`、`tablet` 和 `2in1`，从 API 设计上可运行在 HarmonyOS 7.0；但仓库目前没有覆盖所有 7.0 设备的自动化验证记录。实际运行需要匹配版本的 Flutter OpenHarmony SDK、DevEco Studio、HarmonyOS SDK、签名及 AppGallery Connect Upgrade Kit 配置。详细检查项请参阅 [`docs/harmonyos-7-compatibility.md`](docs/harmonyos-7-compatibility.md)。
+> HarmonyOS 7.0 兼容性：插件的目标设备类型包含 `phone`、`tablet` 和 `2in1`，从 API 设计上可运行在 HarmonyOS 7.0；仓库已完成一台 HarmonyOS 7 真机的构建、安装、启动和检查更新调用验证，但这不代表所有 7.0 设备都无需额外适配。实际运行需要匹配版本的 Flutter OpenHarmony SDK、DevEco Studio、HarmonyOS SDK、签名及 AppGallery Connect Upgrade Kit 配置。详细检查项请参阅 [`docs/harmonyos-7-compatibility.md`](docs/harmonyos-7-compatibility.md)。
 
 ## 适配说明
 

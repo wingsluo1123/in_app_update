@@ -6,12 +6,12 @@ Issue #4：这个插件可以运行在鸿蒙 7.0 吗？
 
 插件的 OpenHarmony 原生模块面向 HarmonyOS/OpenHarmony 的 `phone`、`tablet` 和 `2in1` 设备，使用 AppGallery Connect Upgrade Kit（`@kit.StoreKit`）。因此从设备类型和 API 设计上，HarmonyOS 7.0 属于目标运行范围。
 
-不过，仓库目前没有 HarmonyOS 7.0 真机或模拟器的自动化验证记录，不能承诺在所有 7.0 设备和构建环境中开箱即用。能否成功运行取决于 Flutter OpenHarmony SDK、DevEco Studio、API 版本、签名和 AppGallery Connect 配置是否匹配。
+本仓库已在 HarmonyOS 7 真机上完成构建、签名、安装、启动和检查更新调用验证。该结果覆盖当前验证设备和工具链，不代表所有 7.0 设备及发布配置都无需额外适配。
 
 ## 使用前检查
 
 1. 使用支持 OpenHarmony 的 Flutter SDK，并确认 `flutter --version` 与项目使用的 Flutter 版本兼容。
-2. 在 DevEco Studio 中安装与工程匹配的 HarmonyOS SDK/API；工程示例当前配置为 `compatibleSdkVersion: 5.1.0(18)`，如本机 SDK 不同，请按实际 SDK 调整工程配置。
+2. 在 DevEco Studio 中安装与工程匹配的 HarmonyOS SDK/API；当前验证使用 HarmonyOS SDK API 26（`26.0.0.105`）。
 3. 使用 `phone`、`tablet` 或 `2in1` 设备，并开启 USB 调试和开发者模式。
 4. 在 AppGallery Connect 中完成 Upgrade Kit 配置，确保应用包名、签名证书和发布版本一致。应用内更新需要服务端存在可升级版本，无法仅靠本地安装包验证。
 5. 确认设备可以访问 AppGallery Connect 服务，并在首次运行时授予必要权限。
@@ -31,14 +31,15 @@ flutter run -d <ohos-device-id>
 
 ## 本地实测记录
 
-本仓库曾在以下设备上尝试启动示例应用：
+本仓库已在以下设备上完成示例应用验证：
 
 - 设备系统：HarmonyOS `7.0.0.105`（API 26）
 - 设备架构：`ohos-arm64`
 - Flutter：`3.44.9+ohos-0.0.1-canary1`
-- 结果：设备可被 `flutter devices` 和 `hdc list targets` 正确识别，构建可进入 Hvigor/ArkTS 编译阶段；但当前本机 `@ohos/flutter_ohos` embedding 与安装的 HarmonyOS SDK 在 `autoFillManager` API 上存在版本不匹配，导致 HAP 编译失败。该失败发生在 Flutter embedding 依赖代码中，不是 `in_app_update` 的 Upgrade Kit 代码或 Dart API 引起。
+- 结果：`flutter devices` 和 `hdc list targets` 正确识别设备；Hvigor、ArkTS 编译、HAP 打包、签名、安装和启动均成功。
+- 插件调用：点击“检查更新”后，`InAppUpdateOhosPlugin` 日志记录 `Checking for update...` 和 `Update available: false`，Dart 与 `@kit.StoreKit` 调用链正常返回。本次设备对应的 AppGallery Connect 配置没有可升级版本，因此未测试实际下载和安装新版本。
 
-因此，目前可以确认设备连接和 Flutter 工具链能够识别 HarmonyOS 7，但要完成安装及更新流程验证，还需要将 Flutter OpenHarmony SDK、`@ohos/flutter_ohos` 和 HarmonyOS SDK 调整到相互匹配的版本。
+此前使用旧 SDK 时出现的 `autoFillManager` API 编译错误，来自 Flutter embedding 与 SDK 版本不匹配；切换到 API 26 后该错误消失，不是 `in_app_update` 的 Upgrade Kit 代码或 Dart API 引起。
 
 ## 已知限制
 
