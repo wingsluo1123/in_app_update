@@ -6,7 +6,7 @@ Issue #4：这个插件可以运行在鸿蒙 7.0 吗？
 
 插件的 OpenHarmony 原生模块面向 HarmonyOS/OpenHarmony 的 `phone`、`tablet` 和 `2in1` 设备，使用 AppGallery Connect Upgrade Kit（`@kit.StoreKit`）。因此从设备类型和 API 设计上，HarmonyOS 7.0 属于目标运行范围。
 
-本仓库已在 HarmonyOS 7 真机上完成构建、签名、安装、启动和检查更新调用验证。该结果覆盖当前验证设备和工具链，不代表所有 7.0 设备及发布配置都无需额外适配。
+本仓库已在 HarmonyOS 7 真机上完成构建、签名 HAP 安装、启动和检查更新调用验证。该结果覆盖当前验证设备和工具链，不代表所有 7.0 设备及发布配置都无需额外适配。
 
 ## 使用前检查
 
@@ -36,7 +36,7 @@ flutter run -d <ohos-device-id>
 - 设备系统：HarmonyOS `7.0.0.105`（API 26）
 - 设备架构：`ohos-arm64`
 - Flutter：`3.44.9+ohos-0.0.1-canary1`
-- 结果：`flutter devices` 和 `hdc list targets` 正确识别设备；Hvigor、ArkTS 编译、HAP 打包、签名、安装和启动均成功。
+- 结果：`flutter devices` 和 `hdc list targets` 正确识别设备；Hvigor、ArkTS 编译和 HAP 打包通过，使用此前生成的签名 HAP 完成安装和启动。当前机器重新签名时因工程引用的证书文件缺失而在 `SignHap` 阶段失败，该问题属于本地签名配置，不影响插件兼容性验证。
 - 插件调用：点击“检查更新”后，`InAppUpdateOhosPlugin` 日志记录 `Checking for update...` 和 `Update available: false`，Dart 与 `@kit.StoreKit` 调用链正常返回。本次设备对应的 AppGallery Connect 配置没有可升级版本，因此未测试实际下载和安装新版本。
 
 此前使用旧 SDK 时出现的 `autoFillManager` API 编译错误，来自 Flutter embedding 与 SDK 版本不匹配；切换到 API 26 后该错误消失，不是 `in_app_update` 的 Upgrade Kit 代码或 Dart API 引起。
