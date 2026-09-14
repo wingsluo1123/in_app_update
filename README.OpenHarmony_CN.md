@@ -1,6 +1,13 @@
 ﻿# in_app_update 鸿蒙适配
 
-基于 AppGallery Connect Upgrade Kit 实现应用内更新功能。
+基于 AppGallery Connect Upgrade Kit 实现应用内更新功能。插件保留原有 Dart API，通过 Flutter 平台通道调用 OpenHarmony 原生实现。
+
+## 环境要求
+
+- 支持 OpenHarmony 的 Flutter SDK。
+- 与工程匹配的 DevEco Studio 和 HarmonyOS/OpenHarmony SDK。
+- `phone`、`tablet` 或 `2in1` 设备或模拟器。
+- 已在 AppGallery Connect 中完成 Upgrade Kit 配置。
 
 ## 适配说明
 
