@@ -63,7 +63,8 @@ class InAppUpdate {
 
     return AppUpdateInfo(
       updateAvailability: UpdateAvailability.values.firstWhere(
-          (element) => element.value == result['updateAvailability']),
+          (element) => element.value == result['updateAvailability'],
+          orElse: () => UpdateAvailability.unknown),
       immediateUpdateAllowed: result['immediateAllowed'],
       immediateAllowedPreconditions: result['immediateAllowedPreconditions']
           ?.map<int>((e) => e as int)
@@ -74,7 +75,8 @@ class InAppUpdate {
           .toList(),
       availableVersionCode: result['availableVersionCode'],
       installStatus: InstallStatus.values
-          .firstWhere((element) => element.value == result['installStatus']),
+          .firstWhere((element) => element.value == result['installStatus'],
+              orElse: () => InstallStatus.unknown),
       packageName: result['packageName'],
       clientVersionStalenessDays: result['clientVersionStalenessDays'],
       updatePriority: result['updatePriority'],
